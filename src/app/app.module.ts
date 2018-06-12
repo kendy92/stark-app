@@ -10,7 +10,7 @@ import { CustomersComponent } from './customers/customers.component';
   declarations: [
     AppComponent,
     CarsComponent,
-    CustomersComponent
+    CustomersComponent,
   ],
   imports: [
     BrowserModule,
