@@ -12,10 +12,25 @@ export class CarsService {
   //* create car stock array to hold data from server
   carInventory: Car[] = CARLIST;
 
+  //* create a new car array to hold search cars
+  carResults: Car[] = [];
+
   //* create func to return car stock 
-  getCars(): Observable< Car[] > {
+  getCars(favouriteCar?: string): Observable< Car[] > {
     
-    return of(this.carInventory);
+    if(favouriteCar === undefined) {
+      return of(this.carInventory);
+    }else{
+      this.carResults = []; //* empty array before making a new search request
+       
+       for(let car of this.carInventory) { //* loop through the data from server 
+        if(favouriteCar.toLowerCase() === car.make.toLowerCase()) { //* return fav car if match
+          this.carResults.push(car); //* push search cars to array
+        }
+      }
+      return of(this.carResults); //* return result to comp
+    }
+    
   }
 
   constructor() { }

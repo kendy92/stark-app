@@ -1,7 +1,15 @@
 <div class="container">
-  <h1>CAR LIST</h1>
-  <p>A greate place to find your next dream car. Please see our available stock below.</p>
-  <div *ngIf="carInventory">
+  <h1>CAR INVENTORY</h1>
+  <p>A greate place to find your next dream car. Please see our available stocks below.</p>
+
+  <div>
+    <label style="padding-right: .5em;" for="search_make">Search box</label>
+    <input style="min-width:300px;" [(ngModel)]="searchCar" name="search_make" id="search_make" placeholder="Please enter a car brand..."/>
+    <button (click)="getCars()" class="search-btn"><ion-icon name="search"></ion-icon></button>
+  </div>
+
+  <div *ngIf="carInventory.length > 0; else noCarInventoryFound">
+    <h2>Hooray! We found {{ carInventory.length }} cars that matched your search!</h2>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -28,7 +36,7 @@
             <td>{{ car.year }}</td>
             <td>{{ car.transmissionType }}</td>
             <td>{{ car.vehicleStatus }}</td>
-            <td>{{ car.price }}</td>
+            <td>{{ car.price | currency:'CAD' }}</td>
             <td>{{ car.fuelType }}</td>
             <td> {{ car.kilometres }}</td>
             <td *ngIf="car.hasCarProof; else elseNoCarProof"><img [src]="'assets/images/carproof.png'" class="img-fluid" alt="image"></td>
@@ -40,4 +48,9 @@
         </tbody>
       </table>
   </div>
+  <ng-template #noCarInventoryFound>
+    <div class="jumbotron">
+        <p><strong>Oops! We can not find the car your want. Why don't you try another one?</strong></p>
+    </div>
+  </ng-template>
 </div>
