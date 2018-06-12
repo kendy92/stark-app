@@ -1,3 +1,49 @@
-<p>
-  customers works!
-</p>
+<div class="container">
+    <h1>CLIENT LIST</h1>
+  
+    <div>
+      <label style="padding-right: .5em;" for="search_client">Search box</label>
+      <input style="min-width:350px;" [(ngModel)]="searchClientFirstName" name="search_client" id="search_client" placeholder="Please enter client first or last name..."/>
+      <button (click)="getClients()" class="search-btn"><ion-icon name="search"></ion-icon></button>
+    </div>
+  
+    <div *ngIf="clientList.length > 0; else noClientFound">
+      <h2>Hooray! We found {{ clientList.length }} clients that matched your search!</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>D.O.B</th>
+              <th>Seller Type</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Account status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clientList">
+              <td>{{ client.id }}</td>
+              <td>{{ client.firstName }}</td>
+              <td>{{ client.lastName }}</td>
+              <td>{{ client.dob.toLocaleDateString() }}</td>
+              <td>{{ client.sellerType }}</td>
+              <td>{{ client.contactEmail }}</td>
+              <td>{{ client.contactPhone }}</td>
+              <td>{{ client.clientAddress}}</td>
+              <td *ngIf="client.isActiveMember; else elseMemberNotActive"><span class="badge badge-success">Active</span></td>
+              <ng-template #elseMemberNotActive>
+                <td><span class="badge badge-danger">Inactive</span></td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <ng-template #noClientFound>
+      <div class="jumbotron">
+          <p><strong>No client found. Please try again</strong></p>
+      </div>
+    </ng-template>
+  </div>
