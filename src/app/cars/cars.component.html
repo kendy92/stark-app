@@ -1,3 +1,43 @@
 <div class="container">
-  <p> Car Component works!</p>
+  <h1>CAR LIST</h1>
+  <p>A greate place to find your next dream car. Please see our available stock below.</p>
+  <div *ngIf="carInventory">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Transmission</th>
+            <th>Vehicle Status</th>
+            <th>Price</th>
+            <th>Fuel Type</th>
+            <th>Kilometres</th>
+            <th>CarProof</th>
+            <th>Date posted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of carInventory">
+            <td>{{ car.id }}</td>
+            <td>{{ car.type }}</td>
+            <td>{{ car.make }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.transmissionType }}</td>
+            <td>{{ car.vehicleStatus }}</td>
+            <td>{{ car.price }}</td>
+            <td>{{ car.fuelType }}</td>
+            <td> {{ car.kilometres }}</td>
+            <td *ngIf="car.hasCarProof; else elseNoCarProof"><img [src]="'assets/images/carproof.png'" class="img-fluid" alt="image"></td>
+            <ng-template #elseNoCarProof>
+              <td>Not available</td>
+            </ng-template>
+            <td> {{ car.datePosted.toLocaleDateString() }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
 </div>

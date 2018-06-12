@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    line-height:1.5em;
+    color:#333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+main {
+    min-height:500px;
+    padding-top:1em;
+}
+
+.site-info {
+    text-align:center;
+    font-weight:800;
+    opacity: .75;
+}
+
+.table td, .table th  {
+    vertical-align: middle;
+}
